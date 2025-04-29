@@ -8,10 +8,11 @@
 <script setup>
 import { onMounted } from 'vue'
 import * as Cesium from 'cesium'
+import TOKEN from './stores/token.js'
 
 onMounted(() => {
   // 使用Cesium的Ion服务进行认证
-  Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3ZTY1OWNkMC04NzljLTRkZTMtOThjMC1mOGIyNWY3ODFiNTEiLCJpZCI6Mjg5OTE1LCJpYXQiOjE3NDM1MDA1ODV9.N64gmBwiSB07prZgTjPrK0Q-GwCfIVCJHU9BKf7UbBg';
+  Cesium.Ion.defaultAccessToken = TOKEN;
 
   // 创建一个Viewer实例
   const viewer = new Cesium.Viewer('cesiumContainer', {
