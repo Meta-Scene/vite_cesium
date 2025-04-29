@@ -8,7 +8,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import * as Cesium from 'cesium'
-import TOKEN from './stores/token.js'
+import { TOKEN } from './stores/token.js'
 
 onMounted(() => {
   // 使用Cesium的Ion服务进行认证
