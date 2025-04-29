@@ -1,22 +1,23 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted,provide,ref } from 'vue'
 import * as Cesium from 'cesium'
 import { TOKEN } from './stores/token.js'
 import Proto from './components/proto.vue'
-
+import Flyer from './components/flyer.vue'
+const viewerReady = ref(false);
 let viewer;
-onMounted(() => {
+onMounted(async () => {
   // 使用Cesium的Ion服务进行认证
   Cesium.Ion.defaultAccessToken = TOKEN;
 
   // 创建一个Viewer实例
   viewer = new Cesium.Viewer('cesiumContainer', {
-    // 使用默认的影像图层和地形图层
+    // 使用全球地形数据，启用水面反射和水下地形渲染
     terrainProvider: Cesium.createWorldTerrain({ requestWaterMask: true })
   })
-  // 将 viewer 提供给子组件
+  
   provide('viewer', viewer);
-
+  viewerReady.value = true;
 })
 </script>
 
@@ -24,7 +25,9 @@ onMounted(() => {
   <div id="app">
     <div id="cesiumContainer"></div>
   </div>
-  <Proto />
+  <!-- 只有当 viewer 准备好时，才渲染 Proto 组件 -->
+  <!-- <Proto v-if="viewerReady" /> -->
+  <Flyer v-if="viewerReady" />
 </template>
 
 <style scoped>
