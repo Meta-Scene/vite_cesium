@@ -13,7 +13,8 @@ onMounted(async () => {
   // 创建一个Viewer实例
   viewer = new Cesium.Viewer('cesiumContainer', {
     // 使用全球地形数据，启用水面反射和水下地形渲染
-    terrainProvider: Cesium.createWorldTerrain({ requestWaterMask: true })
+    terrainProvider: Cesium.createWorldTerrain({ requestWaterMask: true }),
+    infoBox: true,
   })
 
   provide('viewer', viewer);

@@ -16,6 +16,7 @@ onMounted(() => {
             outline: true,
             outlineColor: Cesium.Color.WHITE,
           },
+          description:'111111'
         });
         
         viewer.entities.add(box);
