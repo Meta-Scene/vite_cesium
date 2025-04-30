@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted,provide,ref } from 'vue'
+import { onMounted, provide, ref } from 'vue'
 import * as Cesium from 'cesium'
 import { TOKEN } from './stores/token.js'
 import Proto from './components/proto.vue'
@@ -15,7 +15,7 @@ onMounted(async () => {
     // 使用全球地形数据，启用水面反射和水下地形渲染
     terrainProvider: Cesium.createWorldTerrain({ requestWaterMask: true })
   })
-  
+
   provide('viewer', viewer);
   viewerReady.value = true;
 })
@@ -25,9 +25,8 @@ onMounted(async () => {
   <div id="app">
     <div id="cesiumContainer"></div>
   </div>
-  <!-- 只有当 viewer 准备好时，才渲染 Proto 组件 -->
-  <!-- <Proto v-if="viewerReady" /> -->
-  <Flyer v-if="viewerReady" />
+  <Proto v-if="viewerReady" />
+  <!-- <Flyer v-if="viewerReady" /> -->
 </template>
 
 <style scoped>
