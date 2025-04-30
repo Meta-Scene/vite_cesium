@@ -26,7 +26,7 @@ onMounted(async () => {
     <div id="cesiumContainer"></div>
   </div>
   <Proto v-if="viewerReady" />
-  <!-- <Flyer v-if="viewerReady" /> -->
+  <Flyer v-if="viewerReady" />
 </template>
 
 <style scoped>
