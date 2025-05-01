@@ -4,6 +4,7 @@ import * as Cesium from 'cesium'
 import { TOKEN } from './stores/token.js'
 import Proto from './components/proto.vue'
 import Flyer from './components/flyer.vue'
+import Connector from './components/connector.vue'
 const viewerReady = ref(false);
 let viewer;
 onMounted(async () => {
@@ -28,6 +29,7 @@ onMounted(async () => {
   </div>
   <Proto v-if="viewerReady" />
   <Flyer v-if="viewerReady" />
+  <Connector v-if="viewerReady" />
 </template>
 
 <style scoped>
