@@ -21,7 +21,8 @@ onMounted(() => {
         id: 'connector',
         polyline: {
           positions: new Cesium.CallbackProperty(() => {
-            const time = Cesium.JulianDate.now();
+            // const time = Cesium.JulianDate.now();
+            const time = viewer.clock.currentTime;
             const posA = proto.position.getValue(time);
             const posB = flight.position.getValue(time);
             if (!posA || !posB) return [];

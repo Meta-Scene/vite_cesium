@@ -11,25 +11,24 @@ onMounted(() => {
     const centerHeight = 100;
     const radius = 20; // 半径
 
-    // 圆心
-    const centerCartesian = Cesium.Cartesian3.fromDegrees(centerLongitude, centerLatitude, centerHeight);
+    // 圆心坐标
+    const flyerCenter = Cesium.Cartesian3.fromDegrees(centerLongitude, centerLatitude, centerHeight);
 
     // 当前时间开始
     const startTime = Cesium.JulianDate.now();
-    const secondsPerRound = 10; // 一圈10s
+    const spr = 10; // 一圈10s
 
     // 实时更新位置
     const circularPosition = new Cesium.CallbackProperty(function (time, result) {
       const elapsedSeconds = Cesium.JulianDate.secondsDifference(time, startTime);
-      const angle = Cesium.Math.TWO_PI * (elapsedSeconds % secondsPerRound) / secondsPerRound;
+      const angle = Cesium.Math.TWO_PI * (elapsedSeconds % spr) / spr;
 
-      // 根据角度计算圆上点的经纬度偏移
+      //平面坐标偏移量
       const offsetX = radius * Math.cos(angle); 
       const offsetY = radius * Math.sin(angle);
-
-      // 使用 Cesium.Cartesian3.add 不直接修改常量 centerCartesian
       const offset = Cesium.Cartesian3.fromElements(offsetX, offsetY, 0);
-      const matrix = Cesium.Transforms.eastNorthUpToFixedFrame(centerCartesian);
+      //变换矩阵
+      const matrix = Cesium.Transforms.eastNorthUpToFixedFrame(flyerCenter);
       const position = Cesium.Matrix4.multiplyByPoint(matrix, offset, new Cesium.Cartesian3());
 
       return position;
@@ -58,7 +57,7 @@ onMounted(() => {
       position: circularPosition,
       model: {
         uri: 'model/flyer.glb',
-        minimumPixelSize: 128,
+        // minimumPixelSize: 128,
         maximumScale: 200,
       },
       orientation: new Cesium.VelocityOrientationProperty(circularPosition),

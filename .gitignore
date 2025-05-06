@@ -12,7 +12,6 @@ dist
 dist-ssr
 *.local
 src/stores/token.js
-public/model/flyer.glb
 
 # Editor directories and files
 .vscode/*

@@ -8,7 +8,7 @@ onMounted(() => {
     if(viewer){
       const box_longi=120.00024339745657;
       const box_lati=30.290744653771153;
-      const box_high=0;
+      const box_high=15;
       const box_length=50;
       const box_width=50;
       const box_height=30;
@@ -17,11 +17,16 @@ onMounted(() => {
       const box = new Cesium.Entity({
         id:"proto",
         position: position,
-        box: {
-          dimensions: new Cesium.Cartesian3(box_length, box_width, box_height),//长宽高
-          material: Cesium.Color.YELLOW.withAlpha(1),
-          outline: true,
-          outlineColor: Cesium.Color.WHITE,
+        // box: {
+        //   dimensions: new Cesium.Cartesian3(box_length, box_width, box_height),//长宽高
+        //   material: Cesium.Color.YELLOW.withAlpha(1),
+        //   outline: true,
+        //   outlineColor: Cesium.Color.WHITE,
+        // },
+        model: {
+          uri: 'model/proto.glb',
+          // minimumPixelSize: 128,
+          maximumScale: 200,
         },
         description:`经度：${box_longi}°<br/>纬度：${box_lati}°<br/>高度：${box_high}m<br/>物体长宽高：(${box_length},${box_width},${box_height})`
       });
