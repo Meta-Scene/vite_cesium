@@ -1,8 +1,10 @@
 <script setup>
 import * as Cesium from 'cesium';
-import { inject, onMounted } from 'vue';
+import { inject, nextTick, onMounted,ref,watch } from 'vue';
+import * as echarts from 'echarts';
 
 const viewer = inject('viewer');
+
 
 onMounted(() => {
   if (viewer) {
@@ -45,11 +47,13 @@ onMounted(() => {
       const height = cartographic.height.toFixed(2);
     
       return `
+      <div>
+        <h3>飞行物状态</h3>
           <strong>哈哈哈哈哈哈哈哈哈哈</strong><br/>
           经度：${longitude}°<br/>
           纬度：${latitude}°<br/>
           高度：${height} m
-      `;
+      </div>`;
     }, false);
 
     const flightObject = new Cesium.Entity({
@@ -65,7 +69,6 @@ onMounted(() => {
     });
 
     viewer.entities.add(flightObject);
-
     // 相机聚焦飞行物
     // viewer.trackedEntity = flightObject;
 
@@ -76,8 +79,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>22222</div>
+    <div>2222</div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
 
