@@ -1,12 +1,11 @@
 <script setup>
 import * as Cesium from 'cesium';
-import { inject, nextTick, onMounted,ref,watch } from 'vue';
-import * as echarts from 'echarts';
+import { inject, nextTick, onMounted } from 'vue';
 
 const viewer = inject('viewer');
 
-
 onMounted(() => {
+
   if (viewer) {
     const centerLongitude = 120.00024339745657;
     const centerLatitude = 30.290744653771153;
@@ -52,7 +51,8 @@ onMounted(() => {
           <strong>哈哈哈哈哈哈哈哈哈哈</strong><br/>
           经度：${longitude}°<br/>
           纬度：${latitude}°<br/>
-          高度：${height} m
+          高度：${height} m<br/>
+          <button id="toggleChartButton" style="z-index: 999;">显示图表</button>
       </div>`;
     }, false);
 
@@ -69,13 +69,40 @@ onMounted(() => {
     });
 
     viewer.entities.add(flightObject);
+
+  //   nextTick(() => {
+  //   const iframe = document.querySelector('.cesium-infoBox-iframe');
+  //   if (iframe) {
+  //     console.log("iframe存在");
+  //     const src = iframe.getAttribute('src');
+  //     iframe.setAttribute(
+  //       'sandbox',
+  //       'allow-same-origin allow-scripts allow-popups allow-forms'
+  //     );
+  //     // 强制重载，让新 sandbox 生效
+      
+  //     iframe.setAttribute('src', src);
+  //   }
+  // });
     // 相机聚焦飞行物
     // viewer.trackedEntity = flightObject;
-
+    // 每次 InfoBox iframe 加载完成后，给按钮绑定事件
+    // viewer.infoBox.frame.addEventListener('load', () => {
+    //   const doc = viewer.infoBox.frame.contentDocument;
+    //   const btn = doc.getElementById('toggleChartButton');
+    //   if (btn&&!btn.__listenerAdded) {
+    //     btn.__listenerAdded=true;
+    //     btn.addEventListener('click', () => {
+    //       console.log('按钮被点击，执行显示图表逻辑');
+    //       // TODO: 在这里触发你的图表显示/隐藏逻辑
+    //     });
+    //   }
+    // });
   } else {
     console.error('Viewer is not available');
   }
 });
+
 </script>
 
 <template>
